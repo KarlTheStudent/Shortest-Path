@@ -78,8 +78,7 @@ public class Navigator
     System.out.println("Path has been drawn.");
   }
   
-  
-    public static int[] step(int[] fwdCurr, int[]backCurr, ArrayList<Integer> visited, ArrayList<Integer> connected, Node[] n, Canvas myCanvas, 
+  public static int[] step(int[] fwdCurr, int[]backCurr, ArrayList<Integer> visited, ArrayList<Integer> connected, Node[] n, Canvas myCanvas, 
                              Boolean runSlow, boolean consoleOut, int stepCount)
   {
     /* The step method is the primary mechanism of this program.  There are forward nodes which begin at the start node, stored in fwdCurr, 
@@ -190,50 +189,50 @@ public class Navigator
     }
   }
     
- public static int[] backTrack(int backNode, int fwdNode, ArrayList<Integer> visited, ArrayList<Integer> connected, Node[] n, Canvas myCanvas, 
-                               Boolean runSlow, boolean consoleOut, int stepCount)
- {
-   int[] fwdAdjArray = n[fwdNode].getAdjNodes(fwdNode);
-   int[] backAdjArray = n[backNode].getAdjNodes(backNode);
-   int[] returnArray = {-1,-2};
-   
-   
-   if (consoleOut) {System.out.println(" Back Tracking step " + stepCount + ":");}
-   
-   for(int i =0; i < fwdAdjArray.length; i++)
-   {
-     if(itIsIn(fwdAdjArray[i], visited) && !itIsIn(fwdAdjArray[i], connected) && returnArray[0]==-1)
-     {
-       
-       myCanvas.setInkColor(Color.magenta);
-       myCanvas.drawLine(n[fwdNode].getNodeX(), n[fwdNode].getNodeY(), n[fwdAdjArray[i]].getNodeX(), n[fwdAdjArray[i]].getNodeY());
-       myCanvas.drawOval(n[fwdNode].getNodeX()-1, n[fwdNode].getNodeY()-1, 4, 4);
-       myCanvas.drawOval(n[fwdAdjArray[i]].getNodeX()-1, n[fwdAdjArray[i]].getNodeY()-1, 4, 4);
-       if (runSlow) { try{TimeUnit.MILLISECONDS.sleep(300);}catch(InterruptedException e){} }
-       if (consoleOut) {System.out.println("Connecting forward node " + fwdNode + " back to node " + fwdAdjArray[i]);}
-       connected.add(fwdAdjArray[i]);
-       returnArray[0] = fwdAdjArray[i];
-     }
-   }
-   for(int i =0; i < backAdjArray.length; i++)
-   {
-     if(itIsIn(backAdjArray[i], visited) && !itIsIn(backAdjArray[i], connected) && returnArray[1]==-2)
-     {
-       myCanvas.setInkColor(Color.magenta);
-       myCanvas.drawLine(n[backNode].getNodeX(), n[backNode].getNodeY(), n[backAdjArray[i]].getNodeX(), n[backAdjArray[i]].getNodeY());
-       myCanvas.drawOval(n[backAdjArray[i]].getNodeX()-1, n[backAdjArray[i]].getNodeY()-1, 4, 4);
-       myCanvas.drawOval(n[backNode].getNodeX()-1, n[backNode].getNodeY()-1, 4, 4);
-       if (runSlow) { try{TimeUnit.MILLISECONDS.sleep(300);}catch(InterruptedException e){} }
-       if (consoleOut) {System.out.println("Connecting backward node " + backNode + " back to node " + backAdjArray[i]);}
-       connected.add(backAdjArray[i]);
-       returnArray[1] = backAdjArray[i];
-     }
-   }
-   return returnArray;
- }
+  public static int[] backTrack(int backNode, int fwdNode, ArrayList<Integer> visited, ArrayList<Integer> connected, Node[] n, Canvas myCanvas, 
+                                Boolean runSlow, boolean consoleOut, int stepCount)
+  {
+    int[] fwdAdjArray = n[fwdNode].getAdjNodes(fwdNode);
+    int[] backAdjArray = n[backNode].getAdjNodes(backNode);
+    int[] returnArray = {-1,-2};
+    
+    
+    if (consoleOut) {System.out.println(" Back Tracking step " + stepCount + ":");}
+    
+    for(int i =0; i < fwdAdjArray.length; i++)
+    {
+      if(itIsIn(fwdAdjArray[i], visited) && !itIsIn(fwdAdjArray[i], connected) && returnArray[0]==-1)
+      {
+        
+        myCanvas.setInkColor(Color.magenta);
+        myCanvas.drawLine(n[fwdNode].getNodeX(), n[fwdNode].getNodeY(), n[fwdAdjArray[i]].getNodeX(), n[fwdAdjArray[i]].getNodeY());
+        myCanvas.drawOval(n[fwdNode].getNodeX()-1, n[fwdNode].getNodeY()-1, 4, 4);
+        myCanvas.drawOval(n[fwdAdjArray[i]].getNodeX()-1, n[fwdAdjArray[i]].getNodeY()-1, 4, 4);
+        if (runSlow) { try{TimeUnit.MILLISECONDS.sleep(300);}catch(InterruptedException e){} }
+        if (consoleOut) {System.out.println("Connecting forward node " + fwdNode + " back to node " + fwdAdjArray[i]);}
+        connected.add(fwdAdjArray[i]);
+        returnArray[0] = fwdAdjArray[i];
+      }
+    }
+    for(int i =0; i < backAdjArray.length; i++)
+    {
+      if(itIsIn(backAdjArray[i], visited) && !itIsIn(backAdjArray[i], connected) && returnArray[1]==-2)
+      {
+        myCanvas.setInkColor(Color.magenta);
+        myCanvas.drawLine(n[backNode].getNodeX(), n[backNode].getNodeY(), n[backAdjArray[i]].getNodeX(), n[backAdjArray[i]].getNodeY());
+        myCanvas.drawOval(n[backAdjArray[i]].getNodeX()-1, n[backAdjArray[i]].getNodeY()-1, 4, 4);
+        myCanvas.drawOval(n[backNode].getNodeX()-1, n[backNode].getNodeY()-1, 4, 4);
+        if (runSlow) { try{TimeUnit.MILLISECONDS.sleep(300);}catch(InterruptedException e){} }
+        if (consoleOut) {System.out.println("Connecting backward node " + backNode + " back to node " + backAdjArray[i]);}
+        connected.add(backAdjArray[i]);
+        returnArray[1] = backAdjArray[i];
+      }
+    }
+    return returnArray;
+  }
   
- /* Checks if the nodes adjacent to the forward node are in the backward array.  
-  * If adjecent nodes are found it eturns an array of the nodes that are adjacent 
+  /* Checks if the nodes adjacent to the forward node are in the backward array.  
+  * If adjecent nodes are found it returns an array of the nodes that are adjacent 
   * back to the step method to be connected. Otherwise it returns {-1,-1}*/
   public static int[] isAdjInArray(int [] stepNodes, int[] checkNodes, Node[] n)
   {
@@ -287,7 +286,7 @@ public class Navigator
         return true;
       }
     }
-  return false;
+    return false;
   }
   
   //Converts an ArrayList of integers to an array.
@@ -301,9 +300,8 @@ public class Navigator
     return ret;
   }
   
-
-/* this method draws the initial map.  All map objects are created in arrays to allow searching through them*/ 
-public static Canvas drawMap(Hall[] h, Room[] r, Node[] n, boolean consoleOut)
+  /* this method draws the initial map.  All map objects are created in arrays to allow searching through them*/ 
+  public static Canvas drawMap(Hall[] h, Room[] r, Node[] n, boolean consoleOut)
   {
     int windowWidth = 500;
     int windowHeight = 500;
